@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_10_033537) do
+ActiveRecord::Schema.define(version: 2021_05_10_090623) do
 
   create_table "book_comments", force: :cascade do |t|
     t.integer "book_id"
@@ -33,6 +33,14 @@ ActiveRecord::Schema.define(version: 2021_05_10_033537) do
     t.integer "book_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer "folower_id"
+    t.integer "followed_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "follower_id"
   end
 
   create_table "users", force: :cascade do |t|

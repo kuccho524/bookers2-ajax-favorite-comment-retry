@@ -9,7 +9,7 @@
     <div class='col-md-8 offset-md-1'>
   		<h2>Book detail</h2>
   		<table class='table'>
-  		  <tr>
+  		  <tr id="#book_<%= @book.id %>">
   		    <td><%= link_to user_path(@book.user) do %>
             <%= attachment_image_tag(@book.user, :profile_image, :fill, 100, 100, fallback: "no-image-icon.jpg") %><br>
             <%= @book.user.name %>
@@ -22,7 +22,9 @@
           <td><%= link_to 'Destroy', book_path(@book), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@book.id}"%></td>
           <% end %>
           <!-- いいね -->
-          <td><%= render 'books/favorite', book: @book %></td>
+          <td id="favorite_<%= @book.id %>"><%= render 'favorites/favorite-btn', book: @book %></td>
+          <!-- コメント数 -->
+          <td class="comment_count">コメント数: <%= @book.book_comments.count %></td>
         </tr>
       </table>
       <!-- コメント一覧 -->
@@ -31,7 +33,7 @@
       </table>
       <!-- コメント入力フォーム -->
       <div class="comment_form">
-        <%= form_with model:[@book, @book_comment], local:true do |f| %>
+        <%= form_with model:[@book, @book_comment] do |f| %>
           <%= f.text_area :comment, size: '90x5' %><br>
           <%= f.submit '送信' %>
         <% end %>
